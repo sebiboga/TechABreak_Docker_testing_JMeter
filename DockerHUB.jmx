@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.5">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments">You can run me using: jmeter -Jthreads=&lt;Number of threads&gt; -Jrampup=&lt;rampup in seconds&gt; -Jduration=&lt;duration in seconds&gt; -Jiterations=&lt;Number of iterations, -1 means infinite&gt; -e -o &lt;report output folder&gt;</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.num_threads">${__P(threads,10)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(rampup,30)}</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(duration,3600)}</stringProp>
+        <stringProp name="ThreadGroup.delay">5</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">${__P(iterations,-1)}</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/r/justb4/jmeter" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">hub.docker.com</stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">/r/justb4/jmeter</stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="TestPlan.comments">Created from cURL on 2024-09-11T11:54:12.867</stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP HeaderManager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Accept" elementType="Header">
+                <stringProp name="Header.name">Accept</stringProp>
+                <stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</stringProp>
+              </elementProp>
+              <elementProp name="Accept-Language" elementType="Header">
+                <stringProp name="Header.name">Accept-Language</stringProp>
+                <stringProp name="Header.value">en-US,en;q=0.9,ro-RO;q=0.8,ro;q=0.7</stringProp>
+              </elementProp>
+              <elementProp name="Cache-Control" elementType="Header">
+                <stringProp name="Header.name">Cache-Control</stringProp>
+                <stringProp name="Header.value">max-age=0</stringProp>
+              </elementProp>
+              <elementProp name="^Cookie" elementType="Header">
+                <stringProp name="Header.name">^Cookie</stringProp>
+                <stringProp name="Header.value">_vwo_uuid=DB77860C49F04D8B44C3C38DB7887EF58; _vwo_ds=3^%^241722498000^%^3A24.20952673^%^3A^%^3A; dds-theme=^%^7B^%^22preference^%^22^%^3A^%^22system^%^22^%^2C^%^22resolved^%^22^%^3A^%^22light^%^22^%^7D; OptanonAlertBoxClosed=2024-08-07T10:11:14.128Z; _mkto_trk=id:790-SSB-375&amp;token:_mch-docker.com-1723025474473-34963; _gd_visitor=0e579030-3d48-4292-88db-4e382d77c594; ajs_anonymous_id=3a0c050b-12e7-43e5-aefb-64d63b861661; NPS_383366e9_last_seen=1723025474960; userty.core.p.fe7522=__2VySWQiOiIzNWZkNTQyZTU5Mjk0ZmI3NzBhNzM0MTgyNDViMmI4NCJ9eyJ1c; _hjSessionUser_3169877=eyJpZCI6ImMwMGI2ODMyLTUwNzQtNTBlNC05YTkxLTM2M2M0MjkzMTBjMSIsImNyZWF0ZWQiOjE3MjQ3NjI0MjQwMTcsImV4aXN0aW5nIjpmYWxzZX0=; signals-sdk-user-id=b5c8059b-2f52-44dd-9f6e-ef4d237a7301; _gcl_au=1.1.512098721.1726043305; _vwo_uuid_v2=D1B7C663ED1AADDC09097D11CAB0357FE^|16311714f7f7baee4be9f2bde0e98cd4; signals-sdk-session-id=be245d65-4bc9-417b-9810-a0d5b833c5e5; _vis_opt_s=5^%^7C; _vis_opt_test_cookie=1; _fbp=fb.1.1726043305613.958835485432284917; _clck=aw3ztk^%^7C2^%^7Cfp3^%^7C0^%^7C1715; _gid=GA1.2.945847649.1726043306; _clsk=1licyn^%^7C1726043306331^%^7C1^%^7C1^%^7Cx.clarity.ms^%^2Fcollect; _hp2_ses_props.4204607514=^%^7B^%^22r^%^22^%^3A^%^22https^%^3A^%^2F^%^2Fwww.google.com^%^2F^%^22^%^2C^%^22ts^%^22^%^3A1726043306083^%^2C^%^22d^%^22^%^3A^%^22www.docker.com^%^22^%^2C^%^22h^%^22^%^3A^%^22^%^2Fproducts^%^2Fdocker-desktop^%^2F^%^22^%^7D; _vwo_uuid_v2=D1B7C663ED1AADDC09097D11CAB0357FE^|16311714f7f7baee4be9f2bde0e98cd4; mp_d7f79c10b89f9fa3026f2fb08d3cf36d_mixpanel=^%^7B^%^22distinct_id^%^22^%^3A^%^20^%^22^%^24device^%^3A1910ce1a6185e7-0d44436ec4e196-26001e51-232800-1910ce1a6195e7^%^22^%^2C^%^22^%^24device_id^%^22^%^3A^%^20^%^221910ce1a6185e7-0d44436ec4e196-26001e51-232800-1910ce1a6195e7^%^22^%^2C^%^22^%^24search_engine^%^22^%^3A^%^20^%^22google^%^22^%^2C^%^22^%^24initial_referrer^%^22^%^3A^%^20^%^22https^%^3A^%^2F^%^2Fwww.google.com^%^2F^%^22^%^2C^%^22^%^24initial_referring_domain^%^22^%^3A^%^20^%^22www.google.com^%^22^%^7D; OptanonConsent=isGpcEnabled=0&amp;datestamp=Wed+Sep+11+2024+11^%^3A49^%^3A08+GMT^%^2B0300+(Eastern+European+Summer+Time)&amp;version=202306.2.0&amp;browserGpcFlag=0&amp;isIABGlobal=false&amp;hosts=&amp;consentId=59d3e58d-2efe-4666-b060-2723379a6153&amp;interactionCount=2&amp;landingPath=NotLandingPage&amp;groups=C0003^%^3A1^%^2CC0001^%^3A1^%^2CC0002^%^3A1^%^2CC0004^%^3A1&amp;geolocation=RO^%^3BCJ&amp;AwaitingReconsent=false; _gd_session=3d29f700-886c-460a-8d92-90482d311b00; docker-id=; _ga=GA1.2.1101951645.1723025474; _vwo_sn=3545304^%^3A3^%^3A^%^3A^%^3A1; _hp2_id.4204607514=^%^7B^%^22userId^%^22^%^3A^%^22441063076742780^%^22^%^2C^%^22pageviewId^%^22^%^3A^%^222949346918966337^%^22^%^2C^%^22sessionId^%^22^%^3A^%^224934202353275302^%^22^%^2C^%^22identity^%^22^%^3Anull^%^2C^%^22trackerVersion^%^22^%^3A^%^224.0^%^22^%^7D; _hp2_props.4204607514=^%^7B^%^22isLoggedIn^%^22^%^3Afalse^%^2C^%^22unleash_FeaturedSearchResults^%^22^%^3Afalse^%^7D; _ga_7WEJJP8QVN=GS1.2.1726043306.4.1.1726044567.42.0.0; _ga_XJWPQMJYHQ=GS1.2.1726043305.4.1.1726044567.41.0.0; userty.core.s.fe7522=__SI6MTcyNjA0NjYyNjUxNiwic2lkIjoiNTAxODExNDM1NTc0ZjJiYzMxYjFjNzk1NDc2NjI1OWIiLCJzdCI6MTcyNjA0MzMwNzI0MiwicHYiOjMsInJlYWR5Ijp0cnVlLCJ3cyI6IntcIndcIjoxNTM2LFwiaFwiOjczMH0ifQ==eyJzZ^</stringProp>
+              </elementProp>
+              <elementProp name="Referer" elementType="Header">
+                <stringProp name="Header.name">Referer</stringProp>
+                <stringProp name="Header.value">https://www.google.com/</stringProp>
+              </elementProp>
+              <elementProp name="Sec-Fetch-Dest" elementType="Header">
+                <stringProp name="Header.name">Sec-Fetch-Dest</stringProp>
+                <stringProp name="Header.value">document</stringProp>
+              </elementProp>
+              <elementProp name="Sec-Fetch-Mode" elementType="Header">
+                <stringProp name="Header.name">Sec-Fetch-Mode</stringProp>
+                <stringProp name="Header.value">navigate</stringProp>
+              </elementProp>
+              <elementProp name="Sec-Fetch-Site" elementType="Header">
+                <stringProp name="Header.name">Sec-Fetch-Site</stringProp>
+                <stringProp name="Header.value">same-origin</stringProp>
+              </elementProp>
+              <elementProp name="Sec-Fetch-User" elementType="Header">
+                <stringProp name="Header.name">Sec-Fetch-User</stringProp>
+                <stringProp name="Header.value">?1</stringProp>
+              </elementProp>
+              <elementProp name="Upgrade-Insecure-Requests" elementType="Header">
+                <stringProp name="Header.name">Upgrade-Insecure-Requests</stringProp>
+                <stringProp name="Header.value">1</stringProp>
+              </elementProp>
+              <elementProp name="User-Agent" elementType="Header">
+                <stringProp name="Header.name">User-Agent</stringProp>
+                <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36</stringProp>
+              </elementProp>
+              <elementProp name="sec-ch-prefers-color-scheme" elementType="Header">
+                <stringProp name="Header.name">sec-ch-prefers-color-scheme</stringProp>
+                <stringProp name="Header.value">light</stringProp>
+              </elementProp>
+              <elementProp name="^sec-ch-ua" elementType="Header">
+                <stringProp name="Header.name">^sec-ch-ua</stringProp>
+                <stringProp name="Header.value">^\^Chromium^\^;v=^\^128^\^, ^\^Not;A=Brand^\^;v=^\^24^\^, ^\^Google</stringProp>
+              </elementProp>
+              <elementProp name="sec-ch-ua-mobile" elementType="Header">
+                <stringProp name="Header.name">sec-ch-ua-mobile</stringProp>
+                <stringProp name="Header.value">?0</stringProp>
+              </elementProp>
+              <elementProp name="^sec-ch-ua-platform" elementType="Header">
+                <stringProp name="Header.name">^sec-ch-ua-platform</stringProp>
+                <stringProp name="Header.value">^\^Windows^\^^</stringProp>
+              </elementProp>
+            </collectionProp>
+            <stringProp name="TestPlan.comments">Created from cURL on 2024-09-11T11:54:12.868</stringProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP CookieManager" enabled="true">
+          <collectionProp name="CookieManager.cookies"/>
+          <stringProp name="TestPlan.comments">Created from cURL on 2024-09-11T11:54:12.869</stringProp>
+          <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+          <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+        </CookieManager>
+        <hashTree/>
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
